@@ -1,85 +1,45 @@
 {
   "ttsCommands": {
     "type": "text",
-    "label": "TTS Commands (separate by comma for multiple commands)",
+    "label": "Komendy wywołujące TTS'a (można wpisać wiele komend oddzielonych przecinkami)",
     "value": "!tts"
   },
-  "ignoreEmotes": {
-    "type": "checkbox",
-    "label": "Ignore Emotes",
-    "value": true
-  },
-  "ignoreEmojis": {
-    "type": "checkbox",
-    "label": "Ignore Emojis",
-    "value": true
-  },
-  "ignoreLinks": {
-    "type": "checkbox",
-    "label": "Ignore Links",
-    "value": true
-  },
-  "ignoreRepeats": {
-    "type": "checkbox",
-    "label": "Ignore Repeats",
-    "value": true
-  },
-  "stripResponses": {
-    "label": "Remove username from responses",
-    "type": "checkbox",
-    "value": true
-  },
-  "ignoreBits": {
-    "label": "Ignore Bits",
-    "type": "checkbox",
-    "value": true
-  },
-  "useQueue": {
-    "type": "checkbox",
-    "label": "Use Queue (disables overlap)",
-    "value": false
-  },
-  "characterLimit": {
-    "label": "Character Limit (0 for All)",
-    "type": "number",
-    "value": 0,
-    "min": 0
-  },
-  "doUserSaid": {
-    "type": "checkbox",
-    "label": "Prefix message with user name",
-    "value": false
-  },
-  "bannedWords": {
-    "type": "text",
-    "label": "Banned words, comma separated",
-    "value": "shit,fuck,cum"
-  },
-  "privileges": {
-    "type": "dropdown",
-    "label": "Who can participate:",
-    "value": "everybody",
-    "options": {
-      "everybody": "Everybody",
-      "justSubs": "Subs",
-      "subs": "Subs + VIPs + Mods",
-      "vips": "VIPs + Mods",
-      "mods": "Mods",
-      "broadcaster": "Broadcaster"
-    }
-  },
-  "volume": {
+    "volume": {
     "type": "slider",
-    "label": "Volume",
+    "label": "Poziom głoścności TTS'a",
     "value": 1,
     "min": 0,
     "max": 1,
-    "steps": 0.1
+    "steps": 0.01
+  },
+    "privileges": {
+    "type": "dropdown",
+    "label": "Dostęp do TTS'a",
+    "value": "everybody",
+    "options": {
+      "everybody": "Wszyscy",
+      "justSubs": "Suby",
+      "subs": "Suby + VIP'y + Moderatorzy",
+      "vips": "VIP'y + Moderatorzy",
+      "mods": "Moderatorzy",
+      "broadcaster": "Strimer",
+      "mausers": "Przypisani ręcznie użytkownicy"
+    }
+  },
+    "manualyausers": {
+    "type": "text",
+    "label": "Użytkownicy (ID oddzielone przecinkami)",
+    "value": ""
+  },
+    "bannedWords": {
+    "type": "text",
+    "label": "Zablokowane słowa oddzielone przecinkiem",
+    "value": "nigger,czarnuch,cwel,pedał,cfel,pedal,tsfel,nikker"
   },
   "voice": {
     "type": "dropdown",
-    "label": "TTS Voice",
-    "value": "Mizuki",
+    "label": "Głos TTS'a (niektóre nie działają)",
+    "value": "Ewa",
     "options": {
       "Mizuki": "Mizuki",
       "Justin": "Justin",
@@ -290,10 +250,46 @@
       "Naayf": "Naayf"
     }
   },
-  "perUserVoices": {
-    "type": "text",
-    "label": "Voices used for individual users",
-    "value": "Nicole,Russell,Raveena,Amy,Brian,Emma,Joanna,Matthew,Salli"
+  "ignoreEmotes": {
+    "type": "checkbox",
+    "label": "Ignoruj emotki",
+    "value": false
+  },
+  "ignoreEmojis": {
+    "type": "checkbox",
+    "label": "Ignoruj emoji",
+    "value": true
+  },
+  "ignoreLinks": {
+    "type": "checkbox",
+    "label": "Ignoruj linki",
+    "value": true
+  },
+  "ignoreRepeats": {
+    "type": "checkbox",
+    "label": "Ignoruj powtórzenia",
+    "value": true
+  },
+  "stripResponses": {
+    "label": "Pomijaj nick użytkownika w TTS'ie",
+    "type": "checkbox",
+    "value": true
+  },
+  "ignoreBits": {
+    "label": "Ignoruj bitsy",
+    "type": "checkbox",
+    "value": true
+  },
+  "useQueue": {
+    "type": "checkbox",
+    "label": "Używaj kolejkowania (blokuje nakładanie się TTS'ów)",
+    "value": true
+  },
+  "characterLimit": {
+    "label": "Limit znaków",
+    "type": "number",
+    "value": 0,
+    "min": 0
   },
   "changeVoiceCommand": {
     "type": "text",
@@ -441,11 +437,6 @@
       "broadcaster": "Broadcaster"
     }
   },
-  "idToVoiceMap": {
-    "type": "Global TTS",
-    "label": "ID to voice map (JSON)",
-    "value": "{\"137237743\": \"Nicole\", \"583041704\": \"Mizuki\"}"
-  },
   "everybodyBotFilters": {
     "label": "Bots to filter out",
     "group": "Everybody TTS",
@@ -480,18 +471,28 @@
   },
   "widgetName": {
     "type": "hidden",
-    "value": "TTS by Swolekat"
+    "value": "TTS by Swolekat modified by MrAdamsky"
   },
   "widgetAuthor": {
     "type": "hidden",
-    "value": "swolekat"
+    "value": "swolekat, mradamsky"
   },
   "widgetVersion": {
     "type": "hidden",
-    "value": "3.19"
+    "value": "3.20 :3"
   },
   "widgetUpdateUrl": {
     "type": "hidden",
     "value": "https://github.com/swolekat/se-widgets/tree/main/tts"
-  }
+  },
+  "perUserVoices": {
+  "type": "text",
+  "label": "Voices used for individual users",
+  "value": "Nicole,Russell,Raveena,Amy,Brian,Emma,Joanna,Matthew,Salli"
+},
+  "idToVoiceMap": {
+  "type": "Global TTS",
+  "label": "ID to voice map (JSON)",
+  "value": "{\"137237743\": \"Nicole\", \"583041704\": \"Mizuki\"}"
+}
 }

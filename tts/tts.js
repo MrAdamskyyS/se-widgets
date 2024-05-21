@@ -49,7 +49,7 @@ const sayMessage = (message, messageVoice, userDisplayName) => {
         }
     }
 
-    const bannedArray = (bannedWords || '').split(',').filter(w => !!w);
+    const bannedArray = JSON.stringify(bannedWords).split(/[,"]/).filter(w => !!w);
     const sanitizedMessage = message.replace(/\W/g, '').toLowerCase();
     const messageHasBannedWords = bannedArray.some(word => sanitizedMessage.includes(word));
     if(messageHasBannedWords){
@@ -73,18 +73,25 @@ const sayMessage = (message, messageVoice, userDisplayName) => {
 };
 
 const checkPrivileges = (data, privileges) => {
-    const {tags, userId} = data;
+    const {tags, userId, displayName} = data;
     const {mod, subscriber, badges} = tags;
     const required = privileges || fieldData.privileges;
+    const manualyausers = fieldData.manualyausers;
     const isMod = parseInt(mod);
     const isSub = parseInt(subscriber);
     const isVip = (badges.indexOf("vip") !== -1);
     const isBroadcaster = (userId === tags['room-id']);
+  
+  	const currentUser = displayName.toString();
+  	const manualyausersArray = JSON.stringify(manualyausers).split(/[,"]/).filter(w => !!w);
+    const userisAssigned = manualyausersArray.some(word => currentUser.includes(word));
+  
     if (isBroadcaster) return true;
     if (required === "justSubs" && isSub) return true;
     if (required === "mods" && isMod) return true;
     if (required === "vips" && (isMod || isVip)) return true;
     if (required === "subs" && (isMod || isVip || isSub)) return true;
+  	if (required === "mausers" && userisAssigned) return true;
     return required === "everybody";
 };
 
@@ -348,4 +355,3 @@ window.addEventListener('onWidgetLoad', function (obj) {
     fieldData = obj.detail.fieldData;
     apiToken = obj.detail.channel.apiToken;
 });
-
